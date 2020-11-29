@@ -13,8 +13,78 @@
     MinHeight="700"
     Icon="shield.ico">
     <Window.Resources>
+        <!--<local:Superheroe
+            x:Key="superheroeNuevo"
+            Nombre="{Binding ElementName=nombreSuperheroeTextBox, Path=Text}"
+            Imagen="{Binding ElementName=urlImagenTextBox, Path=Text}"
+            Heroe="{Binding ElementName=heroeRadiobutton, Path=IsChecked}"
+            Villano="{Binding ElementName=heroeRadiobutton, Path=IsChecked}"
+            Vengador="{Binding ElementName=vengadoreCheckBox, Path=IsChecked}"
+            Xmen="{Binding ElementName=xmenCheckBox, Path=IsChecked}"/>-->
         <local:Converter
             x:Key="Conversor" />
+        <Style
+            TargetType="Border">
+            <Setter
+                Property="BorderBrush"
+                Value="Black" />
+            <Setter
+                Property="BorderThickness"
+                Value="2" />
+        </Style>
+        
+        <Style
+            TargetType="Button">
+            <Setter
+                Property="Margin"
+                Value="5,15" />
+            <Setter
+                Property="Width"
+                Value="100" />
+        </Style>
+        
+        <Style
+            TargetType="Border"
+            x:Key="bordesSombra"
+            BasedOn="{StaticResource {x:Type Border}}">
+            <Setter
+                Property="Background"
+                Value="White" />
+            <Setter
+                Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        ShadowDepth="6"
+                        BlurRadius="3" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style
+            TargetType="TextBox">
+            <Setter
+                Property="Margin"
+                Value="0,0,0,10" />
+            <Setter
+                Property="Grid.ColumnSpan"
+                Value="2" />
+        </Style>
+
+        <Style
+            TargetType="Image"
+            x:Key="iconosAyuda">
+            <Setter
+                Property="Margin"
+                Value="5,0,0,0" />
+            <Setter
+                Property="Height"
+                Value="20" />
+            <Setter
+                Property="HorizontalAlignment"
+                Value="Left" />
+
+
+        </Style>
     </Window.Resources>
     <DockPanel>
         <TabControl
@@ -27,7 +97,9 @@
                     Background="{Binding Path=Heroe,Converter={StaticResource Conversor}}"
                     LastChildFill="True">
                     <DockPanel
-                        DockPanel.Dock="Top" LastChildFill="True" Margin="5">
+                        DockPanel.Dock="Top"
+                        LastChildFill="True"
+                        Margin="5">
                         <Image
                             DockPanel.Dock="Right"
                             Height="{Binding Path=Xmen,Converter={StaticResource Conversor}}"
@@ -58,7 +130,6 @@
                             </TextBlock.Effect>
                         </TextBlock>
                     </DockPanel>
-                    <!--</Grid>-->
 
                     <StackPanel
                         DockPanel.Dock="Bottom"
@@ -81,52 +152,140 @@
                     </StackPanel>
                     <StackPanel>
                         <Image
-                            Source="{Binding Path=Imagen}" Margin="5" />
+                            Source="{Binding Path=Imagen}"
+                            Margin="5" />
                     </StackPanel>
                 </DockPanel>
             </TabItem>
             <TabItem
                 x:Name="crearSuperheroe"
                 Header="Crear Superhéroe">
-                
-                <DockPanel LastChildFill="True">
-                    <StackPanel
-                        DockPanel.Dock="Right"
-                        Width="400" Margin="10"></StackPanel>
-                    <Grid
-                        Margin="10">
+
+                <Grid
+                    Margin="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
-                        
+                        <ColumnDefinition
+                            Width="2.5*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                            <RowDefinition
-                                Height="20" />
-                            <RowDefinition
-                                Height="20" />
-                            <RowDefinition
-                                Height="20" />
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition
+                            Height="20" />
+                        <RowDefinition
+                            Height="30" />
+                        <RowDefinition
+                            Height="20" />
+                        <RowDefinition
+                            Height="30" />
+                        <RowDefinition
+                            Height="55" />
+                        <RowDefinition
+                            Height="50" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal">
+
                         <TextBlock
-                            Grid.Row="0"
-                            Grid.Column="0"
                             Text="Nombre del superhéroe" />
                         <Image
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            HorizontalAlignment="Left"
+                            Style="{StaticResource iconosAyuda}"
                             ToolTip="Nombre del superhéroe en inglés"
                             Source="info.png" />
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2" />
-                    </Grid>
-                </DockPanel>
+
+                    </StackPanel>
+
+                    <TextBox
+                        x:Name="nombreSuperheroeTextBox"
+                        Grid.Row="1"/>
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="Imagen" />
+                        <Image
+                            Style="{StaticResource iconosAyuda}"
+                            ToolTip="Imagen del superhéroe en formato comic"
+                            Source="info.png" />
+
+                    </StackPanel>
+
+                    <TextBox
+                        x:Name="urlImagenTextBox"
+                        Grid.Row="3"/>
+
+                    <Border
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Style="{StaticResource bordesSombra}">
+                        <StackPanel
+                            Margin="4"
+                            Orientation="Vertical">
+                            <RadioButton
+                                x:Name="heroeRadiobutton"
+                                Content="Héroe"
+                                IsChecked="True"
+                                FontSize="15" />
+                            <RadioButton
+                                x:Name="villanoRadiobutton"
+                                Content="Villano"
+                                FontSize="15" 
+                                Checked="VillanoRadiobutton_Checked"
+                                Unchecked="VillanoRadiobutton_Unchecked"/>
+                        </StackPanel>
+
+                    </Border>
+                    <Border
+                        Margin="8,0,0,0"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Style="{StaticResource bordesSombra}">
+                        <StackPanel
+                            Margin="4"
+                            Orientation="Vertical">
+                            <CheckBox
+                                x:Name="vengadoreCheckBox"
+                                Content="Vengadores"
+                                FontSize="15"/>
+                            <CheckBox
+                                x:Name="xmenCheckBox"
+                                Content="X-men"
+                                FontSize="15" />
+                        </StackPanel>
+                    </Border>
+                    <StackPanel
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                        <Button
+                            x:Name="aceptarButton"
+                            Content="Aceptar"
+                            Click="AceptarButton_Click"
+                            IsDefault="True" />
+                        <Button
+                            x:Name="limpiarButton"
+                            Content="Limpiar"
+                            Click="LimpiarButton_Click"
+                            IsCancel="True" />
+                    </StackPanel>
+
+                    <Border
+                        CornerRadius="3"
+                        Grid.Column="2"
+                        Grid.RowSpan="7"
+                        Margin="8,0,0,0"
+                        Background="LightSalmon">
+                        <Image
+                            Source="{Binding ElementName=urlImagenTextBox, Path=Text}" />
+                    </Border>
+                </Grid>
             </TabItem>
         </TabControl>
 

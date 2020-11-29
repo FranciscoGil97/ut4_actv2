@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -17,7 +13,7 @@ namespace ut4_actv2
             if (targetType.Name == "Visibility")
                 return !(bool)value ? Visibility.Hidden : Visibility.Visible;
             else if (targetType.Name == "Double")
-                return !(bool)value ? 0d : 60d;
+                return !(bool)value ? 0d : 50d;
             else
                 return (bool)value ? Brushes.PaleGreen: Brushes.IndianRed;
             

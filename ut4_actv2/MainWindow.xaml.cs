@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ut4_actv2
 {
@@ -22,32 +12,64 @@ namespace ut4_actv2
         public MainWindow()
         {
             InitializeComponent();
+
             superheroes = Superheroe.GetSamples();
-            
-            verHeroes.DataContext = superheroes[numeroActualSuperHeroe-1];
-            numeroSuperheroes.Text = numeroActualSuperHeroe + "/" + superheroes.Count;
-
-            
-
+            ActualizaVista(0);
         }
 
         private void SiguienteSuperheroe_Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (numeroActualSuperHeroe < superheroes.Count)
-            {
-                numeroSuperheroes.Text = ++numeroActualSuperHeroe + "/" + superheroes.Count;
-                verHeroes.DataContext = superheroes[numeroActualSuperHeroe - 1];
-            }
-            
-
+                ActualizaVista(1);
         }
         private void AnteriorSuperheroe_Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (1<numeroActualSuperHeroe)
-            {
-                numeroSuperheroes.Text = --numeroActualSuperHeroe + "/" + superheroes.Count;
-                verHeroes.DataContext = superheroes[numeroActualSuperHeroe - 1];
-            }
+            if (1 < numeroActualSuperHeroe)
+                ActualizaVista(-1);
+        }
+
+        private void ActualizaVista(int tipo)
+        {
+            numeroActualSuperHeroe += tipo;
+            numeroSuperheroes.Text = (numeroActualSuperHeroe) + "/" + superheroes.Count;
+            verHeroes.DataContext = superheroes[numeroActualSuperHeroe - 1];
+        }
+
+        private void AceptarButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool esHeroe = (bool)heroeRadiobutton.IsChecked;
+            bool esVengador = (bool)vengadoreCheckBox.IsChecked;
+            bool esXmen = (bool)xmenCheckBox.IsChecked;
+
+            superheroes.Add(new Superheroe(nombreSuperheroeTextBox.Text, urlImagenTextBox.Text, esVengador, esXmen, esHeroe, !esHeroe));
+
+            MessageBox.Show("Se ha insertado el nuevo superhéroe");
+            ActualizaVista(0);
+            LimpiarButton_Click(null, null);
+        }
+
+        private void LimpiarButton_Click(object sender, RoutedEventArgs e)
+        {
+            nombreSuperheroeTextBox.Text = "";
+            urlImagenTextBox.Text = "";
+            heroeRadiobutton.IsChecked = true;
+            villanoRadiobutton.IsChecked = false;
+            vengadoreCheckBox.IsChecked = false;
+            xmenCheckBox.IsChecked = false;
+        }
+
+        private void VillanoRadiobutton_Checked(object sender, RoutedEventArgs e)
+        {
+            vengadoreCheckBox.IsEnabled = false;
+            vengadoreCheckBox.IsChecked = false;
+            xmenCheckBox.IsEnabled = false;
+            xmenCheckBox.IsChecked = false;
+        }
+
+        private void VillanoRadiobutton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            vengadoreCheckBox.IsEnabled = true;
+            xmenCheckBox.IsEnabled = true;
         }
     }
 }
