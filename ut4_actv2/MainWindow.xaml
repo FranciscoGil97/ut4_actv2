@@ -13,14 +13,6 @@
     MinHeight="700"
     Icon="shield.ico">
     <Window.Resources>
-        <!--<local:Superheroe
-            x:Key="superheroeNuevo"
-            Nombre="{Binding ElementName=nombreSuperheroeTextBox, Path=Text}"
-            Imagen="{Binding ElementName=urlImagenTextBox, Path=Text}"
-            Heroe="{Binding ElementName=heroeRadiobutton, Path=IsChecked}"
-            Villano="{Binding ElementName=heroeRadiobutton, Path=IsChecked}"
-            Vengador="{Binding ElementName=vengadoreCheckBox, Path=IsChecked}"
-            Xmen="{Binding ElementName=xmenCheckBox, Path=IsChecked}"/>-->
         <local:Converter
             x:Key="Conversor" />
         <Style
