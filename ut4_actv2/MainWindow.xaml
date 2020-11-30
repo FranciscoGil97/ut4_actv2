@@ -26,7 +26,7 @@
                 Property="BorderThickness"
                 Value="2" />
         </Style>
-        
+
         <Style
             TargetType="Button">
             <Setter
@@ -36,7 +36,7 @@
                 Property="Width"
                 Value="100" />
         </Style>
-        
+
         <Style
             TargetType="Border"
             x:Key="bordesSombra"
@@ -53,7 +53,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style
             TargetType="TextBox">
             <Setter
@@ -76,7 +76,9 @@
             <Setter
                 Property="HorizontalAlignment"
                 Value="Left" />
-
+            <Setter
+                Property="Source"
+                Value="info.png" />
 
         </Style>
     </Window.Resources>
@@ -184,8 +186,7 @@
                             Text="Nombre del superhéroe" />
                         <Image
                             Style="{StaticResource iconosAyuda}"
-                            ToolTip="Nombre del superhéroe en inglés"
-                            Source="info.png" />
+                            ToolTip="Nombre del superhéroe en inglés" />
 
                     </StackPanel>
 
@@ -203,8 +204,7 @@
                             Text="Imagen" />
                         <Image
                             Style="{StaticResource iconosAyuda}"
-                            ToolTip="Imagen del superhéroe en formato comic"
-                            Source="info.png" />
+                            ToolTip="Imagen del superhéroe en formato comic" />
 
                     </StackPanel>
 
