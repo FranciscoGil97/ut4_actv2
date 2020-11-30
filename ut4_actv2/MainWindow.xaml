@@ -13,8 +13,10 @@
     MinHeight="700"
     Icon="shield.ico">
     <Window.Resources>
-        <local:Converter
-            x:Key="Conversor" />
+        <local:VisibilityConverter
+            x:Key="VisibilityConversor" />
+        <local:BackgroundConverter
+            x:Key="BackgroundConversor" />
         <Style
             TargetType="Border">
             <Setter
@@ -86,7 +88,7 @@
                 Header="Ver Superhéroes">
                 <DockPanel
                     x:Name="verHeroes"
-                    Background="{Binding Path=Heroe,Converter={StaticResource Conversor}}"
+                    Background="{Binding Path=Heroe,Converter={StaticResource BackgroundConversor}}"
                     LastChildFill="True">
                     <DockPanel
                         DockPanel.Dock="Top"
@@ -94,19 +96,16 @@
                         Margin="5">
                         <Image
                             DockPanel.Dock="Right"
-                            Height="{Binding Path=Xmen,Converter={StaticResource Conversor}}"
-                            Grid.Column="2"
-                            Visibility="{Binding Path=Xmen,Converter={StaticResource Conversor}}"
+                            Visibility="{Binding Path=Xmen,Converter={StaticResource VisibilityConversor}}"
+                            Height="50"
                             Source="xmen.png" />
                         <Image
+                            Height="50"
                             DockPanel.Dock="Right"
-                            Height="{Binding Path=Vengador,Converter={StaticResource Conversor}}"
-                            Grid.Column="1"
-                            Visibility="{Binding Path=Vengador,Converter={StaticResource Conversor}}"
+                            Visibility="{Binding Path=Vengador,Converter={StaticResource VisibilityConversor}}"
                             Source="avengers.png" />
                         <TextBlock
                             VerticalAlignment="Center"
-                            Grid.Column="0"
                             x:Name="nombre"
                             Text="{Binding Path=Nombre}"
                             FontSize="35"
@@ -133,7 +132,6 @@
                             Height="30" />
                         <TextBlock
                             x:Name="numeroSuperheroes"
-                            Text="1/1"
                             FontSize="20"
                             FontWeight="Bold" />
                         <Image
@@ -154,6 +152,7 @@
                 Header="Nuevo Superhéroe">
 
                 <Grid
+                    x:Name="nuevoSuperheroe"
                     Margin="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -192,7 +191,8 @@
 
                     <TextBox
                         x:Name="nombreSuperheroeTextBox"
-                        Grid.Row="1"/>
+                        Grid.Row="1"
+                        Text="{Binding Path=Nombre}" />
                     <StackPanel
                         Grid.Row="2"
                         Grid.Column="0"
@@ -210,7 +210,8 @@
 
                     <TextBox
                         x:Name="urlImagenTextBox"
-                        Grid.Row="3"/>
+                        Grid.Row="3"
+                        Text="{Binding Path=Imagen}" />
 
                     <Border
                         Grid.Row="4"
@@ -222,14 +223,13 @@
                             <RadioButton
                                 x:Name="heroeRadiobutton"
                                 Content="Héroe"
-                                IsChecked="True"
+                                IsChecked="{Binding Path=Heroe}"
                                 FontSize="15" />
                             <RadioButton
                                 x:Name="villanoRadiobutton"
                                 Content="Villano"
-                                FontSize="15" 
-                                Checked="VillanoRadiobutton_Checked"
-                                Unchecked="VillanoRadiobutton_Unchecked"/>
+                                FontSize="15"
+                                IsChecked="{Binding Path=Villano}" />
                         </StackPanel>
 
                     </Border>
@@ -240,14 +240,17 @@
                         Style="{StaticResource bordesSombra}">
                         <StackPanel
                             Margin="4"
-                            Orientation="Vertical">
+                            Orientation="Vertical"
+                            IsEnabled="{Binding ElementName=heroeRadiobutton, Path=IsChecked}">
                             <CheckBox
                                 x:Name="vengadoreCheckBox"
                                 Content="Vengadores"
-                                FontSize="15"/>
+                                IsChecked="{Binding Path=Vengador}"
+                                FontSize="15" />
                             <CheckBox
                                 x:Name="xmenCheckBox"
                                 Content="X-men"
+                                IsChecked="{Binding Path=Xmen}"
                                 FontSize="15" />
                         </StackPanel>
                     </Border>
@@ -280,7 +283,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
-
     </DockPanel>
 </Window>
