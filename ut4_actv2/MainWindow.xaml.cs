@@ -20,7 +20,7 @@ namespace ut4_actv2
                 Heroe = true
             };
             superheroes = Superheroe.GetSamples();
-            ActualizaVista((int)cambioPagina.actual);
+            ActualizaVista(cambioPagina.actual);
             nuevoSuperheroe.DataContext = superheroe;
         }
 
